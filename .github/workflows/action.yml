@@ -41,7 +41,7 @@ jobs:
           done
 
       - name: Build the project
-        run: ./gradlew build
+        run: ./gradlew wrapper
 
       - name: Run tests
         run: ./gradlew test
