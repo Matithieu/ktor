@@ -40,6 +40,9 @@ jobs:
             sleep 5;
           done
 
+      - name: Build the project
+        run: ./gradlew build
+
       - name: Run tests
         run: ./gradlew test
 
