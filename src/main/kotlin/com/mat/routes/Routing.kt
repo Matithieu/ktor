@@ -2,7 +2,7 @@ package com.mat.routes
 
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.mat.repositories.TicketRepository
-import com.mat.routes.ticket.ticketRoutine
+import com.mat.repositories.UserRepository
 import io.ktor.http.*
 import io.ktor.serialization.jackson.*
 import io.ktor.server.application.*
@@ -12,6 +12,7 @@ import io.ktor.server.routing.*
 
 fun Application.configureRouting() {
     val ticketRepository = TicketRepository()
+    val userRepository = UserRepository()
 
     install(ContentNegotiation) {
         jackson {
@@ -27,5 +28,6 @@ fun Application.configureRouting() {
 
     routing {
         ticketRoutine(ticketRepository)
+        userRoutine(userRepository)
     }
 }
