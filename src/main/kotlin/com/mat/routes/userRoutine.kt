@@ -1,7 +1,7 @@
-package com.mat.routes.ticket
+package com.mat.routes
 
-import com.mat.models.Ticket
-import com.mat.repositories.TicketRepository
+import com.mat.models.User
+import com.mat.repositories.UserRepository
 import io.ktor.http.*
 import io.ktor.serialization.*
 import io.ktor.server.application.*
@@ -9,12 +9,12 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-fun Application.ticketRoutine(ticketRepository: TicketRepository) {
+fun Application.userRoutine(userRepository: UserRepository) {
     routing {
-        route("/tickets") {
+        route("/users") {
             get {
-                val tickets = ticketRepository.getAllTickets()
-                call.respond(tickets)
+                val users = userRepository.getAllUsers()
+                call.respond(users)
             }
 
             get("/{id}") {
@@ -25,19 +25,19 @@ fun Application.ticketRoutine(ticketRepository: TicketRepository) {
                     return@get
                 }
 
-                val ticket = ticketRepository.getTicketById(id)
-                if (ticket == null) {
+                val user = userRepository.getUserById(id)
+                if (user == null) {
                     call.respond(HttpStatusCode.NotFound)
                     return@get
                 }
 
-                call.respond(ticket)
+                call.respond(user)
             }
 
             post {
                 try {
-                    val ticket = call.receive<Ticket>()
-                    ticketRepository.addTicket(ticket)
+                    val user = call.receive<User>()
+                    userRepository.addUser(user)
                     call.respond(HttpStatusCode.NoContent)
                 } catch (ex: IllegalStateException) {
                     call.respond(HttpStatusCode.BadRequest)
@@ -54,7 +54,7 @@ fun Application.ticketRoutine(ticketRepository: TicketRepository) {
                     return@delete
                 }
 
-                if (ticketRepository.deleteTicket(id)) {
+                if (userRepository.deleteUser(id)) {
                     call.respond(HttpStatusCode.NoContent)
                 } else {
                     call.respond(HttpStatusCode.NotFound)

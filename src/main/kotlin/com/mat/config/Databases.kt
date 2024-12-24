@@ -1,6 +1,7 @@
 package com.mat.config
 
 import com.mat.models.Tickets
+import com.mat.models.Users
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.jetbrains.exposed.sql.*
@@ -31,5 +32,6 @@ fun createHikariDataSource(): DataSource {
 fun setupTables() {
     transaction {
         SchemaUtils.create(Tickets)
+        SchemaUtils.create(Users)
     }
 }

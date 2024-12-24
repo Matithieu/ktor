@@ -1,4 +1,4 @@
-package com.mat.ticket
+package com.mat
 
 import com.mat.config.configureDatabases
 import com.mat.models.Priority
