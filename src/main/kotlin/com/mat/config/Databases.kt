@@ -16,7 +16,7 @@ fun configureDatabases() {
 // ToFix - This is not the best way to handle this
 fun createHikariDataSource(): DataSource {
     val config = HikariConfig().apply {
-        jdbcUrl = System.getenv("POSTGRES_URL") ?: "jdbc:postgresql://postgres:5432/tryhard"
+        jdbcUrl = System.getenv("POSTGRES_URL") ?: "jdbc:postgresql://localhost:5432/tryhard"
         driverClassName = "org.postgresql.Driver"
         username = System.getenv("POSTGRES_USER") ?: "username"
         password = System.getenv("POSTGRES_PASSWORD") ?: "password"
